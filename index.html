@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nintendo DS Library</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="console">
+
+  <!-- Top nav bar -->
+  <div class="navbar">
+    <div class="navtabs">
+      <span class="navtab active">Library</span>
+      <span class="navtab">Widgets</span>
+      <span class="navtab">Apps</span>
+      <span class="navtab">Settings</span>
+    </div>
+    <div class="navicons">
+      <button id="themeToggle" class="theme-toggle" type="button">☀ Light</button>
+      <span id="clockIcon" class="navclock">--:--</span>
+    </div>
+  </div>
+
+  <!-- Brand + badges row -->
+  <div class="brandbar">
+    <div class="brand"><span class="brand-badge">DS</span> Nintendo DS Library</div>
+    <div class="badges">
+      <span class="badge">📀 <b id="badgeTotal">0</b> items</span>
+      <span class="badge">✅ <b id="badgeOwned">0</b> owned</span>
+      <span class="badge">★ <b id="badgeRated">0</b> rated</span>
+    </div>
+  </div>
+
+  <!-- Filter / search bar -->
+  <div class="filterbar">
+    <div class="pills" id="regionPills">
+      <button class="pill active" data-region="">ALL</button>
+      <button class="pill" data-region="j">JP</button>
+      <button class="pill" data-region="n">NA</button>
+      <button class="pill" data-region="e">EU</button>
+      <button class="pill" data-region="a">AU</button>
+      <button class="pill" id="ownedPill" data-owned="1">OWNED ONLY</button>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Search library...">
+    </div>
+    <select id="sortBy">
+      <option value="title">Sort: Title</option>
+      <option value="year">Sort: Year</option>
+      <option value="rating">Sort: Rating</option>
+      <option value="owned">Sort: Owned first</option>
+    </select>
+  </div>
+
+  <!-- Cover grid -->
+  <div id="grid" class="grid"></div>
+
+  <!-- Bottom status bar -->
+  <div class="statusbar">
+    <span id="statusClock" class="status-clock">--:--</span>
+    <div id="statusInfo" class="status-info">
+      <span class="status-empty">Select a game to see details</span>
+    </div>
+    <div class="status-hints">
+      <span class="hint"><span class="hint-key key-a">A</span> Select</span>
+      <span class="hint"><span class="hint-key key-b">B</span> Back</span>
+    </div>
+  </div>
+
+  <div class="file-controls">
+    <span id="fileStatus" class="file-status">No save file open</span>
+    <button id="btnOpen">Open Save</button>
+    <button id="btnSave">Save</button>
+    <button id="btnSaveAs">Save As</button>
+    <button id="btnImport">Import</button>
+    <button id="btnExport">Export</button>
+    <input type="file" id="importInput" accept="application/json" hidden>
+  </div>
+
+  <footer class="site-footer">
+    Built by <a href="https://github.com/HexLions" target="_blank" rel="noopener">HexLions</a> ·
+    Game data from <a href="https://en.wikipedia.org/wiki/List_of_Nintendo_DS_games" target="_blank" rel="noopener">Wikipedia</a> ·
+    Box art from <a href="https://github.com/libretro-thumbnails/Nintendo_-_Nintendo_DS" target="_blank" rel="noopener">libretro-thumbnails</a>
+  </footer>
+</div>
+
+<!-- Edit modal -->
+<dialog id="gameModal">
+  <form id="gameForm" method="dialog">
+    <h2 id="modalTitle">Game</h2>
+    <p id="modalMeta" class="modal-meta"></p>
+    <input type="hidden" id="gameId">
+
+    <label class="owned-toggle">
+      <input type="checkbox" id="fOwned"> I own this game
+    </label>
+
+    <label>Cover art URL (overrides the auto-found box art)
+      <input type="url" id="fCover" placeholder="https://...">
+    </label>
+
+    <label>My genre tag
+      <input type="text" id="fGenre" list="genreList" placeholder="Platformer, RPG, Puzzle...">
+      <datalist id="genreList"></datalist>
+    </label>
+
+    <label>Rating
+      <select id="fRating">
+        <option value="0">No rating</option>
+        <option value="1">★☆☆☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="4">★★★★☆</option>
+        <option value="5">★★★★★</option>
+      </select>
+    </label>
+
+    <label>Status
+      <select id="fStatus">
+        <option value="notstarted">Not started</option>
+        <option value="inprogress">In progress</option>
+        <option value="completed">Completed</option>
+      </select>
+    </label>
+
+    <label>Playtime (hours)
+      <input type="number" id="fPlaytime" min="0" step="0.5" value="0">
+    </label>
+
+    <label>Notes
+      <textarea id="fNotes" rows="3"></textarea>
+    </label>
+
+    <div class="modal-actions">
+      <button type="button" id="btnCancel">Close</button>
+      <button type="submit" class="primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
