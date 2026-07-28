@@ -2,12 +2,12 @@
 
 A personal Nintendo DS game-collection tracker. Preloaded with all 3,255 officially released DS games — just tick the ones you own, rate them, add notes and playtime.
 
-**[Live demo](#)** _(update this link once GitHub Pages is enabled — see below)_
+**[Live demo](https://hexlions.github.io/ds-game-library/)**
 
 ## Features
 
 - Full DS library preloaded (title, developer, publisher, release year, JP/NA/EU/AU region flags)
-- Real box art for ~72% of games (via [libretro-thumbnails](https://github.com/libretro-thumbnails/Nintendo_-_Nintendo_DS)), colored placeholder for the rest
+- Real box art for ~74% of games (via [libretro-thumbnails](https://github.com/libretro-thumbnails/Nintendo_-_Nintendo_DS)), generated box-style placeholder cover for the rest — every card has an image
 - Tick owned games, rate, add notes/playtime/status, override cover art
 - Search, filter by region / owned-only, sort
 - Dark/light theme toggle
