@@ -29,19 +29,6 @@ function catalogNum(id) {
   return String(CATALOG_INDEX.get(id) || 0).padStart(4, '0');
 }
 
-// Deterministic placeholder colors per title, DS-cartridge-flavored.
-const CART_PALETTE = [
-  ['#e2445c', '#a3132b'], ['#3d7de0', '#1a4aa8'], ['#3aa65a', '#1f7a3c'],
-  ['#f2b632', '#c9861a'], ['#8a5cd6', '#5b32a8'], ['#e87fb0', '#c14f86'],
-  ['#3ec6c6', '#1f9494'], ['#e08a3d', '#b5601c'], ['#6c7a89', '#404b56'],
-  ['#c9a24a', '#8c6d24'],
-];
-function cartColors(title) {
-  let hash = 0;
-  for (let i = 0; i < title.length; i++) hash = (hash * 31 + title.charCodeAt(i)) >>> 0;
-  return CART_PALETTE[hash % CART_PALETTE.length];
-}
-
 function escapeHtml(str) {
   const div = document.createElement('div');
   div.textContent = str == null ? '' : String(str);
@@ -93,11 +80,7 @@ function tileCoverInner(game) {
   const ov = getOverride(game.id);
   const initial = escapeHtml(game.t.charAt(0).toUpperCase());
   const coverUrl = (ov && ov.cover) || game.c;
-  if (coverUrl) {
-    return `<img src="${escapeHtml(coverUrl)}" alt="" loading="lazy" onerror="this.outerHTML='<span class=\\'initial\\'>${initial}</span>'">`;
-  }
-  const [c1, c2] = cartColors(game.t);
-  return `<span class="initial" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(160deg, ${c1}, ${c2})">${initial}</span>`;
+  return `<img src="${escapeHtml(coverUrl)}" alt="" loading="lazy" onerror="this.outerHTML='<span class=\\'initial\\'>${initial}</span>'">`;
 }
 
 function render() {
